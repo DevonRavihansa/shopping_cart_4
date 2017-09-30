@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Product Management</title>
+    <th:block th:replace="fragments/header :: scripts"></th:block>
+</head>
+<body ng-app="app" ng-controller="cartController">
+<ul th:replace="fragments/header :: topNavigation"></ul>
+<ul th:replace="fragments/header :: sideNavigation"></ul>
+
+<div th:fragment="all">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>index</th>
+            <th>sku</th>
+            <th>name</th>
+            <th>price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in products">
+            <td>{{$index + 1}}</td>
+            <td>{{product.sku}}</td>
+            <td><a ng-href="#!/products/{{product.sku}}">{{product.name}}</a></td>
+            <td>{{product.price}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:fragment="detail">
+    <table border="1">
+        <tbody>
+        <tr>
+            <th>name</th>
+            <td>{{product.name}}</td>
+        </tr>
+        <tr>
+            <th>price</th>
+            <td>{{product.price}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:fragment="create">
+    <form ng-submit="">
+        <table border="1">
+            <tbody>
+            <tr>
+                <th>name</th>
+                <td><input type="text" ng-model="product.name" /></td>
+            </tr>
+            <tr>
+                <th>sku</th>
+                <td><input type="text" ng-model="product.sku" /></td>
+            </tr>
+            <tr>
+                <th>price</th>
+                <td><input type="number" ng-model="product.price" /></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="submit">Create Product</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

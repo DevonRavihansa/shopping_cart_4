@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Shop</title>
+    <th:block th:replace="fragments/header :: scripts"></th:block>
+</head>
+<body ng-app="app" ng-controller="cartController">
+<ul th:replace="fragments/header :: topNavigation"></ul>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>image</th>
+        <th>name</th>
+        <th>price</th>
+        <th>#</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td><a th:href="@{/product/{sku}(sku=${product.sku})}"><img th:src="@{{url}(url=${product.image})}"/></a></td>
+        <td><div th:text="${product.name}"></div></td>
+        <td><div th:text="'Rs.'+${product.price}+'/='"></div></td>
+        <td>
+            <form th:attr="ng-submit = 'add(\'' + ${product.sku} + '\')'">
+                <button type="submit">Add to cart</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cart</title>
+    <th:block th:replace="fragments/header :: scripts"></th:block>
+</head>
+<body ng-app="app" ng-controller="cartController">
+<ul th:replace="fragments/header :: topNavigation"></ul>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>price</th>
+        <th>quantity</th>
+        <th>subtotal</th>
+        <th>#</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in cart.items">
+        <td>{{item.product.name}}</td>
+        <td>Rs.{{item.product.price}}/=</td>
+        <td>
+            <form ng-submit="update(item.product.sku, item.quantity)">
+                <input type="number" min="1" ng-model="item.quantity"/>
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>Rs.{{item.subTotal}}/=</td>
+        <td>
+            <form ng-submit="remove(item.product.sku)">
+                <button type="submit">Remove</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h4>Total: Rs.{{cart.total}}/=</h4>
+</body>
+</html>

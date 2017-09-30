@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<head>
+</head>
+<body>
+
+<div th:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>username</th>
+            <th>password</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in users.items">
+            <td>{{item.product.name}}</td>
+            <td>{{item.subTotal}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>{{users.total}}</p>
+</div>
+
+</body>
+</html>
